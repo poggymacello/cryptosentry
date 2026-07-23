@@ -9,11 +9,11 @@ description = "Real bignum RSA plus an honest, citation-backed classical-vs-quan
 requires-python = ">=3.10"
 license = { text = "MIT" }
 dependencies = [
-    "matplotlib",
+    "matplotlib==3.11.1",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest", "ruff"]
+dev = ["pytest", "ruff", "pip-audit", "bandit"]
 
 [project.scripts]
 cryptosentry = "cryptosentry.cli:main"

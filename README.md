@@ -1,5 +1,9 @@
 # CryptoSentry
 
+[![ci](https://github.com/poggymacello/cryptosentry/actions/workflows/ci.yml/badge.svg)](https://github.com/poggymacello/cryptosentry/actions/workflows/ci.yml)
+
+**Toy-parameter keys, generated on the fly — not production cryptography (see Limitations).** For a version of this portfolio built on a real, labeled dataset with a deployed inference service, see [shadowtrace](https://github.com/poggymacello/shadowtrace).
+
 Real bignum RSA, plus an honest classical-vs-quantum factoring complexity comparison, for educational use.
 
 ## Problem
@@ -47,6 +51,7 @@ At small sizes the two curves are close; by real-world key sizes (1024-2048 bits
 - No quantum simulation of any kind. The "quantum" curve is Shor's algorithm's published asymptotic gate-count formula, not a period-finding routine or a quantum circuit.
 - Trial division is only benchmarked up to 28 bits; it is not feasible to run at production key sizes, which is exactly why the large-key comparison uses cited formulas instead of measurement.
 - 255-256 bit keys are convenient for a fast demo and nowhere close to secure; production RSA uses 2048+ bit moduli.
+- **Key generation uses Python's `random.Random` (a Mersenne Twister PRNG), not a cryptographically secure random number generator.** This is deliberate here — it's what makes `generate_keypair(seed=...)` reproducible for tests and demos — but it is a real, well-known class of RSA vulnerability in practice (predictable or low-entropy randomness has caused real-world weak/duplicate RSA keys). Production RSA key generation must use a CSPRNG (e.g., `secrets`, or the OS's `/dev/urandom`), never a seeded PRNG. `bandit` flags both call sites in this codebase (`primes.py`, `rsa.py`) for exactly this reason; they're annotated `# nosec` with this rationale rather than silenced without explanation.
 
 ## References
 

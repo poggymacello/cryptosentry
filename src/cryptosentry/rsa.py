@@ -45,8 +45,13 @@ def _modinv(e: int, phi: int) -> int:
 
 
 def generate_keypair(bits: int = 256, seed: int = 42) -> KeyPair:
-    """Generate a real RSA keypair with ``bits``-bit modulus (``bits // 2``-bit primes)."""
-    rng = random.Random(seed)
+    """Generate a real RSA keypair with ``bits``-bit modulus (``bits // 2``-bit primes).
+
+    Uses a seeded, non-cryptographic PRNG on purpose, for reproducibility in
+    tests and demos. This is not how real keys should be generated -- see
+    README's Limitations section.
+    """
+    rng = random.Random(seed)  # nosec B311: reproducible demo keygen, not a real key generator
     e = PUBLIC_EXPONENT
     while True:
         p = generate_prime(bits // 2, rng)

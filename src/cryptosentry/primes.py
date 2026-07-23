@@ -22,7 +22,10 @@ def is_probable_prime(n: int, rounds: int = 20, rng: random.Random | None = None
         if n % p == 0:
             return False
 
-    rng = rng or random.Random()
+    # deliberately a seedable, non-cryptographic PRNG so keygen is
+    # reproducible for tests/demos. Never use this for real keys -- see
+    # README's Limitations section.
+    rng = rng or random.Random()  # nosec B311
     d = n - 1
     r = 0
     while d % 2 == 0:
