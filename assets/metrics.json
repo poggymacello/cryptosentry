@@ -1,0 +1,10 @@
+{
+  "keypair_bits": 255,
+  "round_trip_ok": true,
+  "trial_division_seconds_by_bit_size": {
+    "16": 5e-06,
+    "20": 1.9e-05,
+    "24": 9.1e-05,
+    "28": 0.000304
+  }
+}
