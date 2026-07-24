@@ -9,6 +9,8 @@ from pathlib import Path
 from cryptosentry import evaluate as eval_mod
 from cryptosentry.factoring import benchmark_trial_division
 from cryptosentry.rsa import decrypt, encrypt, generate_keypair
+from cryptosentry.survey import RAW_PATH, load_survey
+from cryptosentry.survey import summary as survey_summary
 
 DEMO_MESSAGE = b"rsa!"
 TRIAL_DIVISION_BIT_SIZES = [16, 20, 24, 28]
@@ -16,7 +18,9 @@ COMPLEXITY_BIT_RANGE = list(range(16, 2049, 32))
 
 
 def _run_pipeline(keypair_bits: int, seed: int) -> dict:
-    keypair = generate_keypair(bits=keypair_bits, seed=seed)
+    # the demo keypair uses generate_keypair's secure default (secrets.SystemRandom);
+    # `seed` here only reproducibly seeds the trial-division timing benchmark below
+    keypair = generate_keypair(bits=keypair_bits)
     ciphertext = encrypt(DEMO_MESSAGE, keypair.n, keypair.e)
     recovered = decrypt(ciphertext, keypair.n, keypair.d)
     round_trip_ok = recovered == DEMO_MESSAGE
@@ -62,6 +66,28 @@ def cmd_eval(args: argparse.Namespace) -> None:
     print(f"trial-division benchmark: {result['benchmark']}")
 
 
+def cmd_real_train(args: argparse.Namespace) -> None:
+    out_dir = Path(args.output_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    if not RAW_PATH.exists():
+        raise SystemExit(
+            f"{RAW_PATH} not found -- run `python scripts/download_data.py` first "
+            "to collect the real CT log key survey."
+        )
+
+    rows = load_survey()
+    report = survey_summary(rows)
+    (out_dir / "metrics_real.json").write_text(json.dumps(report, indent=2))
+
+    eval_mod.plot_algorithm_share_by_month(
+        report["algorithm_share_by_month"], out_dir / "algorithm_share_by_month.png"
+    )
+
+    print(json.dumps(report, indent=2))
+    print(f"\nartifacts written to {out_dir}/")
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="cryptosentry")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -78,6 +104,12 @@ def build_parser() -> argparse.ArgumentParser:
         "eval", parents=[common], help="re-run the deterministic pipeline and print metrics"
     )
     eval_p.set_defaults(func=cmd_eval)
+
+    real_train_p = sub.add_parser(
+        "real-train", help="summarize the real CT key survey and write metrics_real.json"
+    )
+    real_train_p.add_argument("--output-dir", default="assets")
+    real_train_p.set_defaults(func=cmd_real_train)
 
     return parser
 

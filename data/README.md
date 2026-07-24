@@ -1,10 +1,99 @@
 # Data
 
-There is no external dataset. RSA keypairs are generated on the fly by
-`cryptosentry.rsa.generate_keypair`, using primes produced by
-`cryptosentry.primes.generate_prime` (Miller-Rabin primality testing over
-Python's arbitrary-precision integers). See the main README's Method
-section for what's real (actual random bignum primes, actual modular
-exponentiation) versus what's a cited theoretical estimate (the classical
-vs. quantum complexity comparison, which is not a simulation of either
-algorithm).
+## Real data: Certificate Transparency key survey
+
+400 real, public keys from real, public TLS certificates, sampled
+directly from a live Certificate Transparency (CT) log.
+
+**Only public keys from public certificates are ever touched.** CT logs
+are append-only and public by design (every publicly-trusted CA is
+required to submit issued certificates to them); a certificate's public
+key, issuer, and log timestamp are exactly the information CT exists to
+make publicly auditable. No private key belonging to anyone is
+accessed, stored, or could even theoretically be recovered from this
+data -- CT logs never contain private keys. Only **aggregate**
+statistics across the collected sample are ever reported; no single
+certificate's data is analyzed or reported on its own (except one
+explicitly-called-out investigation of a single unusual entry, see
+below).
+
+### Why a direct log query, not crt.sh
+
+The first version of `scripts/download_data.py` used
+[crt.sh](https://crt.sh), a popular community search service over CT
+logs. When the actual collection run was attempted, crt.sh was
+completely unreachable (verified with a direct request -- connection
+timeouts, not just slow responses), not merely flaky. Rather than keep
+retrying an unresponsive third-party service indefinitely, the script
+was rewritten to query a live CT log directly via its own RFC 6962
+`get-sth`/`get-entries` API -- no search-mirror dependency, same
+underlying real, public data, and a more reliable, lower-latency path
+in practice.
+
+- **Source**: Cloudflare's "Nimbus2026" CT log,
+  `https://ct.cloudflare.com/logs/nimbus2026`, one of the currently
+  "usable" logs listed in Google's canonical CT log list
+  (`https://www.gstatic.com/ct/log_list/v3/log_list.json`, the same
+  list Chrome uses to decide which logs it trusts).
+- **License / citation**: cite Laurie, B., Langley, A., and Kasper, E.
+  "Certificate Transparency." RFC 6962, IETF, 2013 (the protocol this
+  script queries).
+- **Collection method**: `scripts/download_data.py` fetches the log's
+  current tree size via `get-sth`, computes 400 evenly spaced indices
+  across the full `[0, tree_size)` range, and fetches each index
+  individually via `get-entries`. Each entry's `MerkleTreeLeaf`
+  structure is parsed directly (per RFC 6962 section 3.4) to extract
+  the embedded certificate (for `x509_entry` leaves) or pre-certificate
+  (for `precert_entry` leaves -- the pre-certificate carries the same
+  `SubjectPublicKeyInfo` as the final issued certificate, so it's
+  equally valid for key-survey purposes even though it isn't the
+  final, SCT-bearing certificate). The certificate is parsed with the
+  `cryptography` library for public-key algorithm, size, curve (if
+  EC), and public exponent (if RSA); the entry's own CT-log timestamp
+  supplies the year/month used for the migration analysis.
+- **Access date**: 2026-07-24.
+- **Collected range**: despite the log's "2026" name, sampled entries'
+  CT timestamps span **July 2024 through July 2026** -- log-naming
+  conventions don't necessarily bound an individual log's actual entry
+  timestamp range the way the name might suggest, which was confirmed
+  by inspecting the collected data rather than assumed from the name.
+- **Reliability note**: a re-run will sample a different 400
+  certificates (the log continues to grow, and the sampled indices are
+  computed from the tree size at collection time) -- see
+  `assets/metrics_real.json`, written once and not regenerated, for
+  the exact collected counts this project's Results are based on.
+- Not committed to git in full. Rebuild with `python scripts/download_data.py`.
+
+### A single unusual entry, investigated
+
+Log index 0 (the very first sampled index) turned out to be a "Merge
+Delay Intermediate" certificate (issuer: `O=Google UK Ltd.`,
+`OU=Certificate Transparency`) -- a synthetic certificate CT log
+operators periodically log to monitor their own log's merge delay, not
+a real end-entity website certificate. This is a known, documented CT
+operational practice, not a data error. It's 1 row out of 400
+(RSA-2048, which doesn't skew any aggregate meaningfully), kept in the
+dataset and called out explicitly here rather than silently included or
+silently dropped without explanation.
+
+## Sample fixture
+
+`data/sample/ct_key_survey_sample.csv` is a random 100-certificate
+subsample of the real 400-certificate survey (real certificates, real
+public keys -- not synthetic), committed to git for tests, CI, and the
+containerized deployment's `/survey` endpoint. It is not used for any
+reported README Results number; those come from the full 400-certificate
+survey via `python -m cryptosentry real-train`.
+
+## RSA keypairs generated by this project itself
+
+Separately from the CT survey, RSA keypairs used in the RSA
+demonstration, round-trip tests, and the trial-division timing
+benchmark are generated on the fly by
+`cryptosentry.rsa.generate_keypair`, using primes from
+`cryptosentry.primes.generate_prime` (Miller-Rabin primality testing
+over Python's arbitrary-precision integers). As of v2, key generation
+defaults to `secrets.SystemRandom()` (a CSPRNG) rather than a seeded
+PRNG -- see the main README's "What changed from v1" for the fix.
+These are never third-party keys and are never analyzed as part of the
+CT survey; the two data sources are entirely separate.

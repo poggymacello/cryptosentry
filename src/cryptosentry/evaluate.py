@@ -44,3 +44,25 @@ def plot_complexity_comparison(bit_range: list[int], out_path: Path) -> None:
     plt.tight_layout()
     plt.savefig(out_path)
     plt.close()
+
+
+def plot_algorithm_share_by_month(
+    share_by_month: dict[str, dict[str, float]], out_path: Path
+) -> None:
+    """Real RSA-vs-EC issuance share within the surveyed CT log snapshot."""
+    months = sorted(share_by_month.keys())
+    algorithms = sorted({algo for shares in share_by_month.values() for algo in shares})
+
+    plt.figure(figsize=(9, 5))
+    for algo in algorithms:
+        values = [share_by_month[m].get(algo, 0.0) * 100 for m in months]
+        plt.plot(months, values, marker="o", label=algo)
+    plt.xticks(rotation=45, ha="right")
+    plt.xlabel("CT log timestamp (year-month)")
+    plt.ylabel("share of surveyed certificates (%)")
+    plt.title("RSA vs. EC key algorithm share, real CT log snapshot")
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.savefig(out_path)
+    plt.close()

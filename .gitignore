@@ -14,3 +14,8 @@ build/
 .ruff_cache/
 
 NOTES_for_me.md
+
+# Full CT log key survey CSV -- never committed as "raw" (it's derived
+# via live crt.sh queries, not a fixed downloadable file). Rebuild with
+# scripts/download_data.py. data/sample/ (a small fixture) IS committed.
+data/raw/

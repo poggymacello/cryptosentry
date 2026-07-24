@@ -8,6 +8,7 @@ call a black box.
 from __future__ import annotations
 
 import random
+import secrets
 
 _SMALL_PRIMES = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47)
 
@@ -22,10 +23,13 @@ def is_probable_prime(n: int, rounds: int = 20, rng: random.Random | None = None
         if n % p == 0:
             return False
 
-    # deliberately a seedable, non-cryptographic PRNG so keygen is
-    # reproducible for tests/demos. Never use this for real keys -- see
-    # README's Limitations section.
-    rng = rng or random.Random()  # nosec B311
+    # secrets.SystemRandom is a random.Random subclass backed by the OS
+    # CSPRNG (os.urandom) rather than a seedable Mersenne Twister -- the
+    # fix for the exact key-generation vulnerability class this project
+    # studies (see README's "What changed from v1"). A caller that
+    # explicitly wants reproducibility (tests, benchmarks) passes its own
+    # random.Random(seed) instance; nothing here defaults to one.
+    rng = rng or secrets.SystemRandom()
     d = n - 1
     r = 0
     while d % 2 == 0:

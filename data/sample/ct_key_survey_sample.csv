@@ -1,0 +1,101 @@
+log_index,ct_timestamp_year,ct_timestamp_month,issuer,key_algorithm,key_size_bits,rsa_public_exponent,ec_curve
+4603795395,2026,6,"CN=YE2,O=Let's Encrypt,C=US",EC,256,,secp256r1
+802496445,2025,11,"CN=R13,O=Let's Encrypt,C=US",RSA,2048,65537,
+168946620,2025,5,"CN=Encryption Everywhere DV TLS CA - G2,OU=www.digicert.com,O=DigiCert Inc,C=US",RSA,2048,65537,
+5335897415,2026,7,"CN=YE2,O=Let's Encrypt,C=US",EC,256,,secp256r1
+1971043900,2026,1,"CN=R13,O=Let's Encrypt,C=US",RSA,2048,65537,
+1759860625,2025,12,"CN=E7,O=Let's Encrypt,C=US",EC,256,,secp256r1
+1604992890,2025,12,"CN=E7,O=Let's Encrypt,C=US",EC,256,,secp256r1
+999600835,2025,11,"CN=R13,O=Let's Encrypt,C=US",RSA,4096,65537,
+5307739645,2026,6,"CN=YE2,O=Let's Encrypt,C=US",EC,256,,secp256r1
+732102020,2025,10,"CN=R13,O=Let's Encrypt,C=US",RSA,2048,65537,
+4871294210,2026,6,"CN=YE1,O=Let's Encrypt,C=US",EC,256,,secp256r1
+5575238460,2026,7,"CN=YE1,O=Let's Encrypt,C=US",EC,256,,secp256r1
+3928008915,2026,4,"CN=R13,O=Let's Encrypt,C=US",RSA,2048,65537,
+619470940,2025,10,"CN=WE1,O=Google Trust Services,C=US",EC,256,,secp256r1
+4251823270,2026,5,"CN=R12,O=Let's Encrypt,C=US",RSA,2048,65537,
+3041039160,2026,3,"CN=WE1,O=Google Trust Services,C=US",EC,256,,secp256r1
+225262160,2025,5,"CN=Go Daddy Secure Certificate Authority - G2,OU=http://certs.godaddy.com/repository/,O=GoDaddy.com\, Inc.,L=Scottsdale,ST=Arizona,C=US",RSA,2048,65537,
+211183275,2025,5,"CN=Go Daddy Secure Certificate Authority - G2,OU=http://certs.godaddy.com/repository/,O=GoDaddy.com\, Inc.,L=Scottsdale,ST=Arizona,C=US",RSA,2048,65537,
+661707595,2025,10,"CN=WE1,O=Google Trust Services,C=US",EC,256,,secp256r1
+1562756235,2025,12,"CN=R13,O=Let's Encrypt,C=US",RSA,2048,65537,
+1675387315,2025,12,"CN=E8,O=Let's Encrypt,C=US",EC,256,,secp256r1
+3632352330,2026,4,"CN=E7,O=Let's Encrypt,C=US",EC,256,,secp256r1
+4336296580,2026,5,"CN=Amazon ECDSA 384 M01,O=Amazon,C=US",EC,384,,secp384r1
+183025505,2025,5,"CN=Go Daddy Secure Certificate Authority - G2,OU=http://certs.godaddy.com/repository/,O=GoDaddy.com\, Inc.,L=Scottsdale,ST=Arizona,C=US",RSA,2048,65537,
+4040639995,2026,5,"CN=WE1,O=Google Trust Services,C=US",EC,256,,secp256r1
+1421967385,2025,12,"CN=E7,O=Let's Encrypt,C=US",EC,256,,secp256r1
+5152871910,2026,6,"CN=YE2,O=Let's Encrypt,C=US",EC,256,,secp256r1
+4674189820,2026,6,"CN=ZeroSSL ECC DV SSL CA 2,O=ZeroSSL GmbH,C=AT",EC,384,,secp384r1
+5054319715,2026,6,"CN=GoDaddy TLS Intermediate CA DV - R1v1,O=GoDaddy.com,C=US",RSA,2048,65537,
+5448528495,2026,7,"CN=YE1,O=Let's Encrypt,C=US",EC,256,,secp256r1
+3012881390,2026,3,"CN=R13,O=Let's Encrypt,C=US",RSA,2048,65537,
+1576835120,2025,12,"CN=E8,O=Let's Encrypt,C=US",EC,256,,secp256r1
+3224064665,2026,3,"CN=R12,O=Let's Encrypt,C=US",RSA,2048,65537,
+4237744385,2026,5,"CN=R12,O=Let's Encrypt,C=US",RSA,2048,65537,
+1999201670,2026,1,"CN=R12,O=Let's Encrypt,C=US",RSA,2048,65537,
+42236655,2025,2,"CN=GoGetSSL RSA DV CA,O=GoGetSSL,L=Riga,C=LV",RSA,2048,65537,
+1140389685,2025,11,"CN=Go Daddy Secure Certificate Authority - G2,OU=http://certs.godaddy.com/repository/,O=GoDaddy.com\, Inc.,L=Scottsdale,ST=Arizona,C=US",RSA,2048,65537,
+5026161945,2026,6,"CN=YE1,O=Let's Encrypt,C=US",EC,256,,secp256r1
+5406291840,2026,7,"CN=YE2,O=Let's Encrypt,C=US",EC,384,,secp384r1
+2449725990,2026,2,"CN=ZeroSSL ECC Domain Secure Site CA,O=ZeroSSL,C=AT",EC,256,,secp256r1
+5138793025,2026,6,"CN=YR1,O=Let's Encrypt,C=US",RSA,4096,65537,
+1112231915,2025,11,"CN=E8,O=Let's Encrypt,C=US",EC,256,,secp256r1
+1548677350,2025,12,"CN=R12,O=Let's Encrypt,C=US",RSA,4096,65537,
+2421568220,2026,2,"CN=ZeroSSL RSA Domain Secure Site CA,O=ZeroSSL,C=AT",RSA,2048,65537,
+5490765150,2026,7,"CN=YE2,O=Let's Encrypt,C=US",EC,256,,secp256r1
+5364055185,2026,7,"CN=YR2,O=Let's Encrypt,C=US",RSA,2048,65537,
+2731303690,2026,2,"CN=WE1,O=Google Trust Services,C=US",EC,256,,secp256r1
+689865365,2025,10,"CN=R13,O=Let's Encrypt,C=US",RSA,4096,65537,
+2576435955,2026,2,"CN=E8,O=Let's Encrypt,C=US",EC,256,,secp256r1
+2477883760,2026,2,"CN=R12,O=Let's Encrypt,C=US",RSA,2048,65537,
+4350375465,2026,5,"CN=Amazon RSA 2048 M01,O=Amazon,C=US",RSA,2048,65537,
+1900649475,2026,1,"CN=R13,O=Let's Encrypt,C=US",RSA,2048,65537,
+309735470,2025,6,"CN=Encryption Everywhere DV TLS CA - G2,OU=www.digicert.com,O=DigiCert Inc,C=US",RSA,2048,65537,
+3308537975,2026,3,"CN=WR1,O=Google Trust Services,C=US",RSA,2048,65537,
+3857614490,2026,4,"CN=E8,O=Let's Encrypt,C=US",EC,256,,secp256r1
+886969755,2025,11,"CN=R13,O=Let's Encrypt,C=US",RSA,2048,65537,
+2717224805,2026,2,"CN=E7,O=Let's Encrypt,C=US",EC,256,,secp256r1
+563155400,2025,10,"CN=E8,O=Let's Encrypt,C=US",EC,256,,secp256r1
+3970245570,2026,4,"CN=R12,O=Let's Encrypt,C=US",RSA,2048,65537,
+2111832750,2026,1,"CN=R12,O=Let's Encrypt,C=US",RSA,2048,65537,
+4519322085,2026,5,"CN=YR2,O=Let's Encrypt,C=US",RSA,4096,65537,
+4448927660,2026,5,"CN=R12,O=Let's Encrypt,C=US",RSA,2048,65537,
+2604593725,2026,2,"CN=E7,O=Let's Encrypt,C=US",EC,256,,secp256r1
+4153271075,2026,5,"CN=R13,O=Let's Encrypt,C=US",RSA,4096,65537,
+1379730730,2025,12,"CN=R12,O=Let's Encrypt,C=US",RSA,4096,65537,
+492760975,2025,8,"CN=Encryption Everywhere DV TLS CA - G2,OU=www.digicert.com,O=DigiCert Inc,C=US",RSA,2048,65537,
+323814355,2025,6,"CN=Go Daddy Secure Certificate Authority - G2,OU=http://certs.godaddy.com/repository/,O=GoDaddy.com\, Inc.,L=Scottsdale,ST=Arizona,C=US",RSA,2048,65537,
+1633150660,2025,12,"CN=WE1,O=Google Trust Services,C=US",EC,256,,secp256r1
+2083674980,2026,1,"CN=E8,O=Let's Encrypt,C=US",EC,384,,secp384r1
+4814978670,2026,6,"CN=YE1,O=Let's Encrypt,C=US",EC,256,,secp256r1
+5462607380,2026,7,"CN=YE1,O=Let's Encrypt,C=US",EC,256,,secp256r1
+718023135,2025,10,"CN=E8,O=Let's Encrypt,C=US",EC,256,,secp256r1
+4969846405,2026,6,"CN=WE1,O=Google Trust Services,C=US",EC,256,,secp256r1
+5223266335,2026,6,"CN=YR1,O=Let's Encrypt,C=US",RSA,2048,65537,
+3266301320,2026,3,"CN=WR1,O=Google Trust Services,C=US",EC,256,,secp256r1
+2618672610,2026,2,"CN=WR1,O=Google Trust Services,C=US",RSA,2048,65537,
+1168547455,2025,11,"CN=ZeroSSL ECC Domain Secure Site CA,O=ZeroSSL,C=AT",EC,384,,secp384r1
+2660909265,2026,2,"CN=E7,O=Let's Encrypt,C=US",EC,256,,secp256r1
+2548278185,2026,2,"CN=WR1,O=Google Trust Services,C=US",RSA,2048,65537,
+1506440695,2025,12,"CN=R12,O=Let's Encrypt,C=US",RSA,2048,65537,
+1914728360,2026,1,"CN=R12,O=Let's Encrypt,C=US",RSA,4096,65537,
+506839860,2025,8,"CN=Go Daddy Secure Certificate Authority - G2,OU=http://certs.godaddy.com/repository/,O=GoDaddy.com\, Inc.,L=Scottsdale,ST=Arizona,C=US",RSA,2048,65537,
+4378533235,2026,5,"CN=GoDaddy TLS Intermediate CA DV - R1v1,O=GoDaddy.com,C=US",RSA,2048,65537,
+1224862995,2025,11,"CN=R13,O=Let's Encrypt,C=US",RSA,2048,65537,
+3843535605,2026,4,"CN=R13,O=Let's Encrypt,C=US",RSA,2048,65537,
+5547080690,2026,7,"CN=YE1,O=Let's Encrypt,C=US",EC,256,,secp256r1
+4547479855,2026,5,"CN=YR1,O=Let's Encrypt,C=US",RSA,4096,65537,
+3322616860,2026,3,"CN=R12,O=Let's Encrypt,C=US",RSA,2048,65537,
+5617475115,2026,7,"CN=YR2,O=Let's Encrypt,C=US",RSA,4096,65537,
+1942886130,2026,1,"CN=WE1,O=Google Trust Services,C=US",EC,256,,secp256r1
+4012482225,2026,5,"CN=YR2,O=Let's Encrypt,C=US",RSA,2048,65537,
+5181029680,2026,6,"CN=YE2,O=Let's Encrypt,C=US",EC,384,,secp384r1
+2337094910,2026,2,"CN=ZeroSSL ECC Domain Secure Site CA,O=ZeroSSL,C=AT",EC,256,,secp256r1
+394208780,2025,7,"CN=Amazon RSA 2048 M02,O=Amazon,C=US",RSA,2048,65537,
+1647229545,2025,12,"CN=R12,O=Let's Encrypt,C=US",RSA,2048,65537,
+5392212955,2026,7,"CN=YE1,O=Let's Encrypt,C=US",EC,256,,secp256r1
+2266700485,2026,1,"CN=E7,O=Let's Encrypt,C=US",EC,256,,secp256r1
+2886171425,2026,3,"CN=R12,O=Let's Encrypt,C=US",RSA,2048,65537,
+1928807245,2026,1,"CN=R12,O=Let's Encrypt,C=US",RSA,4096,65537,
+464603205,2025,8,"CN=Encryption Everywhere DV TLS CA - G2,OU=www.digicert.com,O=DigiCert Inc,C=US",RSA,2048,65537,

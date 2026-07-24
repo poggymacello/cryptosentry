@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import math
 import random
+import secrets
 from dataclasses import dataclass
 
 from cryptosentry.primes import generate_prime
@@ -44,14 +45,20 @@ def _modinv(e: int, phi: int) -> int:
     return x % phi
 
 
-def generate_keypair(bits: int = 256, seed: int = 42) -> KeyPair:
+def generate_keypair(bits: int = 256, rng: random.Random | None = None) -> KeyPair:
     """Generate a real RSA keypair with ``bits``-bit modulus (``bits // 2``-bit primes).
 
-    Uses a seeded, non-cryptographic PRNG on purpose, for reproducibility in
-    tests and demos. This is not how real keys should be generated -- see
-    README's Limitations section.
+    ``rng`` defaults to ``secrets.SystemRandom()``, a CSPRNG backed by the
+    OS's entropy source (``os.urandom``) -- this is the actual fix for the
+    key-generation vulnerability class this project studies (predictable
+    or low-entropy randomness has caused real-world weak/duplicate RSA
+    keys; v1 used a seeded Mersenne Twister here, which is exactly that
+    vulnerability). Pass an explicit ``random.Random(seed)`` only when you
+    specifically need reproducibility (tests, timing benchmarks) and are
+    not generating a key that matters -- see ``factoring.benchmark_trial_division``
+    for the one legitimate use of that escape hatch in this codebase.
     """
-    rng = random.Random(seed)  # nosec B311: reproducible demo keygen, not a real key generator
+    rng = rng or secrets.SystemRandom()
     e = PUBLIC_EXPONENT
     while True:
         p = generate_prime(bits // 2, rng)

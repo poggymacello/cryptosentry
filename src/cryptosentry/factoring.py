@@ -10,6 +10,7 @@ actually running trial division at that scale is not feasible.
 
 from __future__ import annotations
 
+import random
 import time
 
 from cryptosentry.rsa import generate_keypair
@@ -28,10 +29,18 @@ def trial_division_factor(n: int) -> tuple[int, int]:
 
 
 def benchmark_trial_division(bit_sizes: list[int], seed: int = 42) -> dict[int, float]:
-    """For each modulus bit size, generate a real keypair and time factoring it."""
+    """For each modulus bit size, generate a real keypair and time factoring it.
+
+    Uses a seeded ``random.Random`` explicitly (not the secure default in
+    ``generate_keypair``), because this benchmark only needs a reproducible
+    plot across CI runs -- the generated key is thrown away immediately
+    after being factored, never used as an actual key. See
+    ``generate_keypair``'s docstring for why that default matters
+    everywhere else.
+    """
     results: dict[int, float] = {}
     for bits in bit_sizes:
-        keypair = generate_keypair(bits=bits, seed=seed)
+        keypair = generate_keypair(bits=bits, rng=random.Random(seed))  # nosec B311
         start = time.perf_counter()
         p, q = trial_division_factor(keypair.n)
         elapsed = time.perf_counter() - start
